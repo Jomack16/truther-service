@@ -1,0 +1,17 @@
+{
+  "type": "mysql",
+  "host": "192.168.1.230",
+  "port": 3306,
+  "password": "truther",
+  "username": "truther",
+  "database": "truther",
+  "logging": true,
+  "synchronize": true,
+  "entities": ["/src/**/entities/*.ts"],
+  "subscribers": ["subscriber/*.js"],
+  "migrations": ["*.ts"],
+  "cli": {
+    "entitiesDir": "/src/**/entities/*.js",
+    "migrationsDir": "/src/migration/*.ts"
+  }
+}
