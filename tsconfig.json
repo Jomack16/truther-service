@@ -3,7 +3,7 @@
     "lib": ["es5", "es6"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "target": "es5",
+    "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./build",

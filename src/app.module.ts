@@ -16,6 +16,8 @@ import { Denial } from './denial/entities/denial.entity';
 import { Affirmation } from './affirmation/entities/affirmation.entity';
 import { Activity } from './activity/entities/activity.entity';
 import { Comment } from './comment/entities/comment.entity';
+import { AuthModule } from './auth/auth.module';
+import { UtilsModule } from './utils/utils.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { Comment } from './comment/entities/comment.entity';
     DenialModule,
     FriendModule,
     TruthModule,
+    AuthModule,
+    UtilsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

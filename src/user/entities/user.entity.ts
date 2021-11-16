@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BeforeInsert,
 } from 'typeorm';
 import { UserEthnicity, UserReligion, UserRole } from '../../enums/user.enum';
 import { Denial } from '../../denial/entities/denial.entity';
@@ -13,6 +15,7 @@ import { Comment } from '../../comment/entities/comment.entity';
 import { Affirmation } from '../../affirmation/entities/affirmation.entity';
 import { Activity } from '../../activity/entities/activity.entity';
 import { Friend } from '../../friend/entities/friend.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -21,6 +24,10 @@ export class User {
 
   @Column()
   username: string;
+
+  @Column()
+  @Exclude()
+  password: string;
 
   @Column()
   email: string;
@@ -91,10 +98,19 @@ export class User {
 
   @OneToMany(() => Friend, (friend) => friend.user)
   friends: Friend[];
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(
+      this.password,
+      Number(process.env.SALT_ROUNDS),
+    );
+  }
 }
 
 export interface UserDto {
   username: string;
+  password: string;
   email: string;
   role: UserRole;
   firstName: string;
